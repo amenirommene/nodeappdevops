@@ -5,38 +5,38 @@ agent any
         registry = "192.168.33.10:8083"
 }
 stages { 
-stage('Install dependencies') { 
-steps{ 
-script { 
-sh('npm install') 
-} 
-} 
-} 
-stage('Unit Test') { 
-steps{ 
-script { 
-sh('npm test') 
-} 
-} 
-} 
-stage('SonarQube Analysis') {
-      steps{
-      script {  
-                    def scannerHome = tool 'scanner'
-                    withSonarQubeEnv {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                } 
-              }  
-            }
+// stage('Install dependencies') { 
+// steps{ 
+// script { 
+// sh('npm install') 
+// } 
+// } 
+// } 
+// stage('Unit Test') { 
+// steps{ 
+// script { 
+// sh('npm test') 
+// } 
+// } 
+// } 
+// stage('SonarQube Analysis') {
+//       steps{
+//       script {  
+//                     def scannerHome = tool 'scanner'
+//                     withSonarQubeEnv {
+//                     sh "${scannerHome}/bin/sonar-scanner"
+//                         }
+//                 } 
+//               }  
+//             }
 
-stage('Build application') { 
-steps{ 
-script { 
-sh('npm run build-dev') 
-} 
-} 
-} 
+// stage('Build application') { 
+// steps{ 
+// script { 
+// sh('npm run build-dev') 
+// } 
+// } 
+// } 
     stage('Building images (node and mongo)') {
       steps{
         script {
@@ -48,7 +48,7 @@ sh('npm run build-dev')
      steps{  
          script {
              docker.withRegistry("http://"+registry, registryCredentials ) {
-            sh('docker push $registry/nodemongoapp:5.0 ')
+            sh('docker push $registry/nodemongoapp:6.0 ')
           }
         }
       }
